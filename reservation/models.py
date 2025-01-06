@@ -8,7 +8,7 @@ class Food(models.Model):
     price = models.FloatField()
 
 
-class reservation(models.Model):
+class Reservation(models.Model):
     username = models.ForeignKey(User,on_delete=models.CASCADE)
     food_name = models.ForeignKey(Food, on_delete=models.CASCADE)
 
