@@ -2,7 +2,6 @@ from django.db import models
 from account.models import User
 
 class Poll(models.Model):
-    poll_number = models.IntegerField()
     text = models.TextField()
 
 
@@ -19,4 +18,4 @@ class Notification(models.Model):
 class Notification_User(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     number = models.ForeignKey(Notification, on_delete=models.CASCADE)
-    
+
