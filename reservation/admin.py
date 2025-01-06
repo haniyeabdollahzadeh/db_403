@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from .models import Food, Reservation
 from django.utils.html import format_html
 
@@ -25,3 +25,4 @@ class ReservationAdmin(admin.ModelAdmin):
 # ثبت مدل‌ها در پنل ادمین
 admin.site.register(Food, FoodAdmin)
 admin.site.register(Reservation, ReservationAdmin)
+"""

@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from .models import Poll, Poll_comment, Notification, Notification_User
 from django.utils.html import format_html
 from django.db.models import Count
@@ -59,3 +59,4 @@ admin.site.register(Poll, PollAdmin)
 admin.site.register(Poll_comment, PollCommentAdmin)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Notification_User, NotificationUserAdmin)
+"""

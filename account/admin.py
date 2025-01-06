@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 from django.utils.translation import gettext_lazy as _
@@ -43,3 +43,4 @@ class CustomUserAdmin(UserAdmin):
 
 # ثبت مدل در ادمین با استفاده از کلاس ادمین سفارشی
 admin.site.register(User, CustomUserAdmin)
+"""
