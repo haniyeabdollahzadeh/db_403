@@ -1,14 +1,14 @@
-"""from django.contrib import admin
+from django.contrib import admin
 from .models import Transaction
 from django.utils.translation import gettext_lazy as _
 
 # --- Transaction Admin ---
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('Tnumber', 'username', 'amount', 'formatted_amount', 'transaction_date')  # نمایش شماره تراکنش، نام کاربر، مبلغ و تاریخ
+    list_display = ('Tnumber', 'username', 'amount', 'formatted_amount', )  # نمایش شماره تراکنش، نام کاربر، مبلغ و تاریخ
     search_fields = ('Tnumber', 'username__username')  # جستجو بر اساس شماره تراکنش و نام کاربر
-    list_filter = ('transaction_date',)  # فیلتر بر اساس تاریخ تراکنش
-    ordering = ('-transaction_date',)  # مرتب‌سازی بر اساس تاریخ تراکنش به صورت نزولی
-    date_hierarchy = 'transaction_date'  # فیلتر کردن بر اساس تاریخ تراکنش
+    # list_filter = ('transaction_date',)  # فیلتر بر اساس تاریخ تراکنش
+    # ordering = ('-transaction_date',)  # مرتب‌سازی بر اساس تاریخ تراکنش به صورت نزولی
+    # date_hierarchy = 'transaction_date'  # فیلتر کردن بر اساس تاریخ تراکنش
     list_per_page = 20  # نمایش 20 رکورد در هر صفحه
 
     def formatted_amount(self, obj):
@@ -21,4 +21,3 @@ class TransactionAdmin(admin.ModelAdmin):
 
 # ثبت مدل‌ها در ادمین
 admin.site.register(Transaction, TransactionAdmin)
-"""

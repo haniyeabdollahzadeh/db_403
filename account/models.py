@@ -8,9 +8,9 @@ class User(AbstractUser):
         ("U", "user")
     )
     
-    phone = models.CharField(max_length=11)
-    access_level = models.CharField(max_length=1, choices=LEVEL_CHOICES)
-    credit = models.FloatField()
+    phone = models.CharField(max_length=11,null=True,blank=True)
+    access_level = models.CharField(max_length=1, choices=LEVEL_CHOICES,null=True,blank=True)
+    credit = models.FloatField(default=0.0)
     created_at = models.DateTimeField(auto_now_add=True)  
 
     def str(self):
