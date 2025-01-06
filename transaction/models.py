@@ -1,3 +1,8 @@
 from django.db import models
+from account.models import User
 
-# Create your models here.
+
+class Transaction(models.Model):
+    Tnumber = models.IntegerField()
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.FloatField() 
