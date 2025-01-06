@@ -1,36 +1,27 @@
 from django.contrib import admin
 from .models import Food, Reservation
-from django.utils.translation import gettext_lazy as _
+from django.utils.html import format_html
 
-# --- Food Admin ---
+# مدل غذا در پنل ادمین
 class FoodAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'formatted_price')  # نمایش نام غذا و قیمت
+    list_display = ('name', 'price', 'created_at', 'updated_at')  # نمایش فیلدهای مربوطه در لیست
     search_fields = ('name',)  # جستجو بر اساس نام غذا
-    list_filter = ('price',)  # فیلتر بر اساس قیمت
-    ordering = ('name',)  # مرتب‌سازی بر اساس نام غذا به صورت صعودی
-    list_per_page = 20  # نمایش 20 رکورد در هر صفحه
+    list_filter = ('created_at',)  # فیلتر بر اساس تاریخ ایجاد
+    ordering = ('-created_at',)  # مرتب‌سازی بر اساس تاریخ ایجاد
+    readonly_fields = ('created_at', 'updated_at')  # نمایش فقط خواندنی فیلدهای تاریخ
 
-    def formatted_price(self, obj):
-        return f"${obj.price:.2f}"  # فرمت کردن قیمت به دلار
-    formatted_price.short_description = _('Formatted Price')
-
-# --- Reservation Admin ---
+# مدل رزرو در پنل ادمین
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('username', 'food_name', 'reservation_date', 'price')  # نمایش نام کاربر، نام غذا و تاریخ رزرو
+    list_display = ('username', 'food_name', 'quantity', 'total_price', 'created_at', 'updated_at')  # نمایش فیلدهای رزرو
     search_fields = ('username__username', 'food_name__name')  # جستجو بر اساس نام کاربری و نام غذا
-    list_filter = ('reservation_date', 'food_name__price')  # فیلتر بر اساس تاریخ رزرو و قیمت غذا
-    ordering = ('-reservation_date',)  # مرتب‌سازی بر اساس تاریخ رزرو به صورت نزولی
-    date_hierarchy = 'reservation_date'  # فیلتر کردن بر اساس تاریخ رزرو
-    list_per_page = 20  # نمایش 20 رکورد در هر صفحه
+    list_filter = ('created_at',)  # فیلتر بر اساس تاریخ رزرو
+    ordering = ('-created_at',)  # مرتب‌سازی بر اساس تاریخ رزرو
+    readonly_fields = ('created_at', 'updated_at', 'total_price')  # نمایش فقط خواندنی فیلدهای تاریخ و قیمت کل
 
-    def price(self, obj):
-        return obj.food_name.price  # نمایش قیمت غذا در رزرو
-    price.short_description = _('Food Price')
+    def total_price(self, obj):
+        return f"{obj.total_price:.2f} USD"  # نمایش قیمت کل با دو رقم اعشار
+    total_price.admin_order_field = 'total_price'  # امکان مرتب‌سازی بر اساس قیمت کل
 
-    def reservation_date(self, obj):
-        return obj.created_at  # فرض بر اینکه `created_at` در مدل `Reservation` وجود دارد
-    reservation_date.admin_order_field = 'created_at'  # اجازه مرتب‌سازی بر اساس زمان رزرو
-
-# ثبت مدل‌ها در ادمین
+# ثبت مدل‌ها در پنل ادمین
 admin.site.register(Food, FoodAdmin)
 admin.site.register(Reservation, ReservationAdmin)
