@@ -75,11 +75,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.postgresql',
-        'PASSWORD': 8177
+        'NAME': 'db_403',                      
+        'USER': 'owner',
+        'PASSWORD': 8177,
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
