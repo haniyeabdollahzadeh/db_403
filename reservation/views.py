@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import login
@@ -71,3 +72,18 @@ def custom_login(request):
         form = AuthenticationForm()
 
     return render(request, 'registration/login.html', {'form': form})
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()  # ثبت‌نام کاربر
+            messages.success(request, 'حساب کاربری شما با موفقیت ایجاد شد!')
+            return redirect('login')  # بعد از ثبت‌نام به صفحه لاگین هدایت می‌شود
+        else:
+            messages.error(request, 'لطفاً فرم را به درستی پر کنید.')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration/signup.html', {'form': form})
