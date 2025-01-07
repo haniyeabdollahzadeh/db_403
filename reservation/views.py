@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .forms import FoodForm, ReservationForm
@@ -20,7 +21,7 @@ def food_list(request):
     foods = Food.objects.all()
     return render(request, 'food_list.html', {'foods' : foods})
 
-
+@login_required
 def reservation_create(request):
     if request.method == 'POST':
         form = ReservationForm(request.POST)
