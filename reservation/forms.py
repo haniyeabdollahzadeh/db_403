@@ -12,7 +12,7 @@ class FoodForm(forms.ModelForm):
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['food', 'quantity'] 
+        fields = ['food_name', 'quantity'] 
 
     meal_type = forms.ChoiceField(
 
@@ -25,4 +25,4 @@ class ReservationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         meal_type = self.initial.get('meal_type')
         if meal_type:
-            self.fields['food'].queryset = Food.objects.filter(meal_type = meal_type)      
+            self.fields['food_name'].queryset = Food.objects.filter(meal_type = meal_type)      
