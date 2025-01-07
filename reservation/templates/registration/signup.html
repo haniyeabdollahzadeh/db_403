@@ -1,0 +1,31 @@
+
+  <h2>ثبت‌نام</h2>
+  
+  <form method="post">
+    {% csrf_token %}
+    
+    <div>
+      <label for="id_username">نام کاربری</label>
+      <input type="text" name="username" id="id_username" required>
+    </div>
+    
+    <div>
+      <label for="id_password1">رمز عبور</label>
+      <input type="password" name="password1" id="id_password1" required>
+    </div>
+    
+    <div>
+      <label for="id_password2">تکرار رمز عبور</label>
+      <input type="password" name="password2" id="id_password2" required>
+    </div>
+    
+    <button type="submit">ثبت‌نام</button>
+  </form>
+  
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <p class="message">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
