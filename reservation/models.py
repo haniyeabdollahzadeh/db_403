@@ -4,8 +4,14 @@ from account.models import User
 
 
 class Food(models.Model):
+    MEAL_CHOICES = (
+        ("B", 'صبحانه'),
+        ("L", 'ناهار'),
+        ("D", 'شام')
+    )
     name = models.CharField(max_length=100)  # نام غذا
     price = models.FloatField()  # قیمت غذا
+    meal_type = models.CharField(max_length=10, choices=MEAL_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)  # تاریخ ایجاد غذا
     updated_at = models.DateTimeField(auto_now=True)  # تاریخ آخرین به‌روزرسانی
 

@@ -6,7 +6,7 @@ from .models import Food
 @csrf_protect
 def food_creat(request):
     if request.method == 'POST':
-        form = FoodForm(request)
+        form = FoodForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('food_list')
