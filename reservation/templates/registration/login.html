@@ -19,14 +19,12 @@
     <button type="submit">ورود</button>
   </form>
   
-  {% if form.errors %}
-    <ul>
-      {% for field in form %}
-        {% for error in field.errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <p class="message">{{ message }}</p>
       {% endfor %}
-    </ul>
+    </div>
   {% endif %}
   
   {% if next %}
