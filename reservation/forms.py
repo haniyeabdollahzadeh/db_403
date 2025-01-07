@@ -11,13 +11,13 @@ class FoodForm(forms.ModelForm):
 
 class ReservationForm(forms.ModelForm):
     class Meta:
-        Reservation
+        model = Reservation
         fields = ['food', 'quantity'] 
 
     meal_type = forms.ChoiceField(
-        
+
         choices=Food.MEAL_CHOICES,
-        label='انتخاب وعده غذایی'
+        label='انتخاب وعده غذایی',
         widget=forms.RadioSelect,
     )     
 
