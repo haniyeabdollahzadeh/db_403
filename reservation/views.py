@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
-from .forms import FoodForm
+from .forms import FoodForm, ReservationForm
 from .models import Food
 
 @csrf_protect
@@ -20,3 +21,16 @@ def food_list(request):
     return render(request, 'food_list.html', {'foods' : foods})
 
 
+def reservation_create(request):
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            # رزرو غذا
+            reservation = form.save(commit=False)
+            reservation.user = request.user  # فرض بر اینکه کاربر در حال حاضر لاگین است
+            reservation.save()
+            return HttpResponse('رزرو شما با موفقیت ثبت شد!')
+    else:
+        form = ReservationForm()
+
+    return render(request, 'reservation_create.html', {'form': form})
