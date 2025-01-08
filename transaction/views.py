@@ -7,21 +7,30 @@ from django.contrib.auth.decorators import login_required
 from django.db import connection
 
 
+from django.db import connection
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+
 @login_required
 def transaction_list(request):
     if request.user.is_superuser:
-        sql = "SELECT * FROM app_transaction"
-        transactions = connection.cursor().execute(sql).fetchall()
+        sql = "SELECT * FROM transaction_transaction"
+        with connection.cursor() as cursor:
+            cursor.execute(sql)
+            transactions = cursor.fetchall()
     else:
-        sql = "SELECT * FROM app_transaction WHERE username_id = %s"
-        transactions = connection.cursor().execute(sql, [request.user.id]).fetchall()
+        sql = "SELECT * FROM transaction_transaction WHERE username_id = %s"
+        with connection.cursor() as cursor:
+            cursor.execute(sql, [request.user.id])
+            transactions = cursor.fetchall()
 
     return render(request, "transaction_list.html", {"transactions": transactions})
 
 
 @login_required
 def transaction_detail(request, transaction_id):
-    sql = "SELECT * FROM app_transaction WHERE id = %s"
+    sql = "SELECT * FROM transaction_transaction WHERE id = %s"
     transaction = connection.cursor().execute(sql, [transaction_id]).fetchone()
 
     if not transaction or (
@@ -50,7 +59,7 @@ def transaction_create(request):
                 with connection.cursor() as cursor:
                     cursor.execute(
                         """
-                        INSERT INTO yourapp_transaction (Tnumber, username_id, amount, created_at)
+                        INSERT INTO yourtransaction_transaction (Tnumber, username_id, amount, created_at)
                         VALUES (%s, %s, %s, NOW())
                     """,
                         [Tnumber, request.user.id, amount],
