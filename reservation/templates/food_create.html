@@ -1,19 +1,17 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ایجاد غذا</title>
+    <title>Create Food</title>
 </head>
 <body>
-    <h1>ایجاد غذا جدید</h1>
+    <h1>Create New Food</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">ایجاد غذا</button>
+        <button type="submit">Save Food</button>
     </form>
-    <a href="{% url 'food_list' %}">بازگشت به لیست غذاها</a>
+    <a href="{% url 'food_list' %}">Back to Food List</a>
 </body>
 </html>
