@@ -1,21 +1,42 @@
 {% load static %}
+
+
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لیست غذاها</title>
+    <title>Food List</title>
 </head>
 <body>
-    <h1>لیست غذاها</h1>
-    <ul>
-        {% for food in foods %}
-            <li>{{ food.name }} - {{ food.price }} تومان</li>
-        {% empty %}
-            <li>هیچ غذایی موجود نیست.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'food_create' %}">ایجاد غذا جدید</a>
+    <h1>Available Foods</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'food_create' %}">Create New Food</a>
+    {% endif %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Meal Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for food in foods %}
+                <tr>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.price }}</td>
+                    <td>{{ food.get_meal_type_display }}</td>
+                    <td>{{ food.created_at }}</td>
+                    <td>{{ food.updated_at }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No foods available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
+
