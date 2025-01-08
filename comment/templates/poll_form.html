@@ -7,11 +7,26 @@
 </head>
 <body>
     <h1>Create Poll</h1>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        
+        <label for="text">Poll Text:</label>
+        <textarea name="text" id="text" rows="4" cols="50">{{ request.POST.text }}</textarea>
+        
         <button type="submit">Save</button>
     </form>
+    
     <a href="{% url 'poll-list' %}">Back to Poll List</a>
 </body>
 </html>
