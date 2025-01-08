@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزرو غذا</title>
+    <title>Create Reservation</title>
 </head>
 <body>
-    <h1>رزرو غذا</h1>
-    {% if user.is_authenticated %}
-    <!-- فرم رزرو غذا برای کاربرانی که وارد شده‌اند -->
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">رزرو غذا</button>
+    <h1>Reserve Food</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Reserve</button>
     </form>
-  {% else %}
-    <p>برای رزرو غذا باید وارد حساب کاربری خود شوید. <a href="{% url 'login' %}?next={{ request.path }}">وارد شوید</a></p>
-  {% endif %}
-  
+    <a href="{% url 'food_list' %}">Back to Food List</a>
 </body>
 </html>
