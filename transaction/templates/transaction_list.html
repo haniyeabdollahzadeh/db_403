@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction List</title>
+</head>
+<body>
+    <h1>Transaction List</h1>
+    <a href="{% url 'transaction-create' %}">Create New Transaction</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Transaction Number</th>
+                <th>Amount</th>
+                <th>Username</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.Tnumber }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.username.username }}</td>
+                    <td>{{ transaction.created_at }}</td>
+                    <td>
+                        <a href="{% url 'transaction-detail' transaction.id %}">Details</a>
+                        <form action="{% url 'transaction-delete' transaction.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No transactions found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
