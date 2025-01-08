@@ -18,7 +18,6 @@ class Food(models.Model):
     def __str__(self):
         return self.name
 
-
 class Reservation(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)  # نام کاربری که رزرو کرده است
     food_name = models.ForeignKey(Food, on_delete=models.CASCADE)  # غذایی که رزرو شده است
