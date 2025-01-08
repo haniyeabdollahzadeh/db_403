@@ -1,37 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+
+        td[colspan="5"] {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Reservation List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Food</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for reservation in reservations %}
+
+    <div class="container">
+        <h1>Reservation List</h1>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ reservation.username.username }}</td>
-                    <td>{{ reservation.food_name.name }}</td>
-                    <td>{{ reservation.quantity }}</td>
-                    <td>{{ reservation.total_price }}</td>
-                    <td>{{ reservation.created_at }}</td>
+                    <th>Username</th>
+                    <th>Food</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Created At</th>
                 </tr>
-            {% empty %}
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.1 }}</td> <!-- username -->
+                    <td>{{ reservation.2 }}</td> <!-- food_name -->
+                    <td>{{ reservation.3 }}</td> <!-- quantity -->
+                    <td>{{ reservation.4 }}</td> <!-- total_price -->
+                    <td>{{ reservation.5 }}</td> <!-- created_at -->
+                </tr>
+                {% empty %}
                 <tr>
                     <td colspan="5">No reservations available.</td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 </body>
+
 </html>

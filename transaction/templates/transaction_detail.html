@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        strong {
+            color: #444;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Transaction Detail</h1>
-    <p><strong>ID:</strong> {{ transaction.id }}</p>
-    <p><strong>Transaction Number:</strong> {{ transaction.Tnumber }}</p>
-    <p><strong>Amount:</strong> {{ transaction.amount }}</p>
-    <p><strong>Username:</strong> {{ transaction.username.username }}</p>
-    <p><strong>Created At:</strong> {{ transaction.created_at }}</p>
-    <a href="{% url 'transaction-list' %}">Back to Transactions</a>
+    <div class="container">
+        <h1>Transaction Detail</h1>
+        <p><strong>ID:</strong> {{ transaction.id }}</p>
+        <p><strong>Transaction Number:</strong> {{ transaction.Tnumber }}</p>
+        <p><strong>Amount:</strong> ${{ transaction.amount }}</p>
+        <p><strong>Username:</strong> {{ transaction.username.username }}</p>
+        <p><strong>Created At:</strong> {{ transaction.created_at }}</p>
+        <div class="back-btn">
+            <a href="{% url 'transaction-list' %}">Back to Transactions</a>
+        </div>
+    </div>
 </body>
+
 </html>

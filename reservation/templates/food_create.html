@@ -1,17 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Food</title>
+    <title>ایجاد غذا</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px;
+            background: linear-gradient(145deg, #ffffff, #f1f1f1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Create New Food</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Food</button>
-    </form>
-    <a href="{% url 'food_list' %}">Back to Food List</a>
+    <div class="container">
+        <h1>ایجاد غذا</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">نام غذا:</label>
+            <input type="text" name="name" id="name" required><br>
+
+            <label for="description">توضیحات:</label>
+            <input type="text" name="description" id="description" required><br>
+
+            <label for="price">قیمت:</label>
+            <input type="text" name="price" id="price" required><br>
+
+            <button type="submit">ثبت</button>
+        </form>
+    </div>
 </body>
+
 </html>
