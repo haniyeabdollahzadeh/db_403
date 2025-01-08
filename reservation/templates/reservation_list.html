@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation List</title>
+</head>
+<body>
+    <h1>Reservation List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Food</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.username.username }}</td>
+                    <td>{{ reservation.food_name.name }}</td>
+                    <td>{{ reservation.quantity }}</td>
+                    <td>{{ reservation.total_price }}</td>
+                    <td>{{ reservation.created_at }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No reservations available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

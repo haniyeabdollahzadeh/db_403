@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .forms import FoodForm, ReservationForm
-from .models import Food
+from .models import Food, Reservation
 
 @csrf_protect
 def food_creat(request):
@@ -37,6 +37,12 @@ def reservation_create(request):
         form = ReservationForm()
 
     return render(request, 'reservation_create.html', {'form': form})
+
+
+@login_required
+def reservation_list(request):
+    reservations = Reservation.objects.all()
+    return render(request, 'reservation_list.html', {'reservations': reservations})
 
 
 
