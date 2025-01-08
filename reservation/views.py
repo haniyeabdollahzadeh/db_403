@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.contrib.auth import login
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .forms import FoodForm, ReservationForm
@@ -42,33 +40,3 @@ def reservation_create(request):
 
 
 
-def custom_login(request):
-    # اگر کاربر در حال حاضر وارد شده باشد، به صفحه اصلی هدایت شود
-    if request.user.is_authenticated:
-        return redirect('home')  # به صفحه‌ای که می‌خواهید هدایت کنید
-
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            # اعتبارسنجی نام کاربری و رمز عبور
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            
-            if user is not None:
-                # لاگین کردن کاربر
-                login(request, user)
-                
-                # پس از لاگین، کاربر به صفحه‌ای که در حال حاضر در آن است یا صفحه‌ای که در URL آمده (پارامتر next) هدایت می‌شود
-                next_url = request.GET.get('next', 'home')  # به مسیر 'home' به عنوان پیش‌فرض
-                return redirect(next_url)
-            else:
-                # اگر کاربر نامعتبر باشد، پیامی نشان داده می‌شود
-                messages.error(request, "نام کاربری یا رمز عبور اشتباه است.")
-        else:
-            # اگر فرم معتبر نباشد، ارورهایی نمایش داده می‌شود
-            messages.error(request, "لطفاً فرم را به درستی پر کنید.")
-    else:
-        form = AuthenticationForm()
-
-    return render(request, 'registration/login.html', {'form': form})
