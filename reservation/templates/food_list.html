@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست غذاها</title>
+</head>
+<body>
+    <h1>لیست غذاها</h1>
+    <ul>
+        {% for food in foods %}
+            <li>{{ food.name }} - {{ food.price }} تومان</li>
+        {% empty %}
+            <li>هیچ غذایی موجود نیست.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'food_create' %}">ایجاد غذا جدید</a>
+</body>
+</html>

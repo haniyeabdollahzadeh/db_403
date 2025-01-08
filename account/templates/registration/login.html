@@ -1,0 +1,32 @@
+
+  <h2>ورود به حساب کاربری</h2>
+  
+  <form method="post">
+    {% csrf_token %}
+    
+    <div>
+      <label for="id_username">نام کاربری</label>
+      <input type="text" name="username" id="id_username" value="{{ request.POST.username }}" required>
+    </div>
+    
+    <div>
+      <label for="id_password">رمز عبور</label>
+      <input type="password" name="password" id="id_password" required>
+    </div>
+    
+    <button type="submit">ورود</button>
+  </form>
+  
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <p class="message">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+  
+  {% if next %}
+    <p>بعد از ورود به سیستم، شما به صفحه قبلی خود باز خواهید گشت.</p>
+  {% else %}
+    <p>در صورتی که حساب کاربری ندارید، می‌توانید <a href="{% url 'signup' %}">اینجا</a> ثبت‌نام کنید.</p>
+  {% endif %}
