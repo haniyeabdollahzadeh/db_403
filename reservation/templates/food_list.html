@@ -1,42 +1,78 @@
-{% load static %}
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food List</title>
-</head>
-<body>
-    <h1>Available Foods</h1>
-    {% if user.is_staff %}
-        <a href="{% url 'food_create' %}">Create New Food</a>
-    {% endif %}
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Meal Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for food in foods %}
-                <tr>
-                    <td>{{ food.name }}</td>
-                    <td>{{ food.price }}</td>
-                    <td>{{ food.get_meal_type_display }}</td>
-                    <td>{{ food.created_at }}</td>
-                    <td>{{ food.updated_at }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="5">No foods available.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+    <title>لیست غذاها</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
 
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .food {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .food h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .food p {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .food p:first-of-type {
+            font-weight: bold;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>لیست غذاها</h1>
+        {% for food in foods %}
+        <div class="food">
+            <h2>{{ food.0 }}</h2>
+            <p>{{ food.1 }}</p>
+            <p>{{ food.2 }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

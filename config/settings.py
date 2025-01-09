@@ -79,14 +79,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_403',                      
-        'USER': 'postgres',
-        'PASSWORD': 8177,
-        'HOST': 'localhost',
-        'PORT': 5432,
-    }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "db_403",
+        "USER": "root",
+        "PASSWORD": "6104",
+        "HOST": "127.0.0.1",
+        "CONN_MAX_AGE": 3600,
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
+    },
 }
 
 
@@ -137,4 +140,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'account.User'
-

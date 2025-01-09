@@ -1,31 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
 
-  <h2>ثبت‌نام</h2>
-  
-  <form method="post">
-    {% csrf_token %}
-    
-    <div>
-      <label for="id_username">نام کاربری</label>
-      <input type="text" name="username" id="id_username" required>
-    </div>
-    
-    <div>
-      <label for="id_password1">رمز عبور</label>
-      <input type="password" name="password1" id="id_password1" required>
-    </div>
-    
-    <div>
-      <label for="id_password2">تکرار رمز عبور</label>
-      <input type="password" name="password2" id="id_password2" required>
-    </div>
-    
-    <button type="submit">ثبت‌نام</button>
-  </form>
-  
-  {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-        <p class="message">{{ message }}</p>
-      {% endfor %}
-    </div>
-  {% endif %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    form input,
+    form select,
+    form button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    p a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>ثبت‌نام</h1>
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <label for="username">نام کاربری:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password1">رمز عبور:</label>
+      <input type="password" id="password1" name="password1" required>
+
+      <label for="password2">تکرار رمز عبور:</label>
+      <input type="password" id="password2" name="password2" required>
+
+      <label for="email">ایمیل:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">شماره تلفن:</label>
+      <input type="text" id="phone" name="phone">
+
+      <label for="access_level">سطح دسترسی:</label>
+      <select id="access_level" name="access_level">
+        <option value="U" selected>کاربر</option>
+        <option value="A">ادمین</option>
+      </select>
+
+      <button type="submit">ثبت‌نام</button>
+    </form>
+    <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="{% url 'login' %}">وارد شوید</a></p>
+    {% for message in messages %}
+    <p class="error">{{ message }}</p>
+    {% endfor %}
+  </div>
+</body>
+
+</html>
